@@ -1,0 +1,15 @@
+type Transaction {
+    id : ID!
+    name : String!
+    transactionType: String
+    amount: Float!
+    category: String
+    createdDate: String
+}
+
+type Query {
+    income(id : ID!): Transaction!
+    incomes(filter: String!): [Transaction!]
+    expense(id: ID!): Transaction!
+    expenses(filter: String!): [Transaction!]
+}
