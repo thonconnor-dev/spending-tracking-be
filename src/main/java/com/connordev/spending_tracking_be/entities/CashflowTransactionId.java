@@ -1,33 +1,24 @@
 package com.connordev.spending_tracking_be.entities;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.Embeddable;
 
-@Entity(name = "income")
-public class IncomeEntity {
-    @Id
-    @Column(name = "id")
-    private String id;
-
+@Embeddable
+public class CashflowTransactionId {
+    @Column(name = "cashflow_id")
+    private String cashflowId;
     @Column(name = "transaction_id")
     private String transactionId;
-
-    public String getId() {
-        return id;
+    public String getCashflowId() {
+        return cashflowId;
     }
-
-    public void setId(String id) {
-        this.id = id;
+    public void setCashflowId(String cashflowId) {
+        this.cashflowId = cashflowId;
     }
-
     public String getTransactionId() {
         return transactionId;
     }
-
     public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
     }
-
-    
 }
