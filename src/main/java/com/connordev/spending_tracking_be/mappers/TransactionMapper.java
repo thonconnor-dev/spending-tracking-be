@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Component;
 
-import com.connordev.spending_tracking_be.codegen.types.Transaction;
 import com.connordev.spending_tracking_be.entities.TransactionEntity;
 import com.connordev.spending_tracking_be.models.CategoryModel;
 import com.connordev.spending_tracking_be.models.TransactionModel;
@@ -56,7 +55,7 @@ public class TransactionMapper {
         .register();
     }
 
-    public TransactionModel map(Transaction transaction) {
+    public TransactionModel map(TransactionEntity transaction) {
         return mapperFactory.getMapperFacade().map(transaction, TransactionModel.class);
     }
 
