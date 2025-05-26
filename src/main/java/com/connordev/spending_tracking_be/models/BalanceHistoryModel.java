@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class BalanceHistoryModel {
     private String id;
-    private String currentAmount;
+    private Double balance;
     private LocalDateTime createdDate;
     private TransactionModel transaction;
 }
