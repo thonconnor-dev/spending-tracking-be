@@ -12,10 +12,20 @@ import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.MappingContext;
 
+/**
+ * Mapper class responsible for converting between CategoryEntity and CategoryModel objects.
+ * Uses Orika MapperFactory for object mapping with custom handling of ID fields.
+ */
 @Component
 public class CategoryMapper {
     private MapperFactory mapperFactory;
 
+    /**
+     * Constructs a new CategoryMapper and configures the mapping rules.
+     * Sets up bidirectional mapping between CategoryEntity and CategoryModel with custom ID handling.
+     *
+     * @param mapperFactory The Orika MapperFactory instance for configuring mappings
+     */
     public CategoryMapper(MapperFactory mapperFactory) {
         this.mapperFactory = mapperFactory;
         mapperFactory.classMap(CategoryEntity.class, CategoryModel.class)
@@ -39,10 +49,22 @@ public class CategoryMapper {
         .register();
     }
 
+    /**
+     * Maps a CategoryEntity to a CategoryModel.
+     *
+     * @param categoryEntity The source entity to map from
+     * @return A new CategoryModel instance with mapped properties
+     */
     public CategoryModel map(CategoryEntity categoryEntity) {
         return mapperFactory.getMapperFacade().map(categoryEntity, CategoryModel.class);
     }
 
+    /**
+     * Maps a CategoryModel to a CategoryEntity.
+     *
+     * @param categoryModel The source model to map from
+     * @return A new CategoryEntity instance with mapped properties
+     */
     public CategoryEntity map(CategoryModel categoryModel) {
         return mapperFactory.getMapperFacade().map(categoryModel, CategoryEntity.class);
     }

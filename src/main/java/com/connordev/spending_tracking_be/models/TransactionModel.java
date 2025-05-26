@@ -12,7 +12,7 @@ import lombok.Data;
 public class TransactionModel {
     private String id;
     private String name;
-    private String amount;
+    private Double amount;
     private CategoryModel category;
     private TransactionType transactionType;
     private LocalDateTime createdDate;

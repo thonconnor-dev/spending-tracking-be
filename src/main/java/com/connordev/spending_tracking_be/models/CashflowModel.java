@@ -9,8 +9,8 @@ import lombok.Data;
 @Builder
 public class CashflowModel {
     private String id;
-    private Float incomeAmount;
-    private Float expenseAmount;
+    private double incomeAmount;
+    private double expenseAmount;
     private int month;
     private int year;
     private List<TransactionModel> transactions;
