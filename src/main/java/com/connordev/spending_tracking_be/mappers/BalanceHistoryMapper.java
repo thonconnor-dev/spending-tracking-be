@@ -20,6 +20,7 @@ public class BalanceHistoryMapper {
                 .field("balance", "balance")
                 .exclude("createdAt")
                 .exclude("id")
+                .field("transactionId", "transaction.id")
                 .customize(new CustomMapper<BalanceHistoryEntity, BalanceHistoryModel>() {
                     @Override
                     public void mapAtoB(BalanceHistoryEntity source, BalanceHistoryModel destination,

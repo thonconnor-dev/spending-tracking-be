@@ -14,39 +14,48 @@ public class CashflowEntity {
     @Column(name = "cashflow_year")
     private int year;
     @Column(name = "income_amount")
-    private Float incomeAmount;
+    private Double incomeAmount;
     @Column(name = "expense_amount")
-    private Float expenseAmount;
+    private Double expenseAmount;
+
     public String getId() {
         return id;
     }
+
     public void setId(String id) {
         this.id = id;
     }
+
     public int getMonth() {
         return month;
     }
+
     public void setMonth(int month) {
         this.month = month;
     }
+
     public int getYear() {
         return year;
     }
+
     public void setYear(int year) {
         this.year = year;
     }
-    public Float getIncomeAmount() {
+
+    public Double getIncomeAmount() {
         return incomeAmount;
     }
-    public void setIncomeAmount(Float incomeAmount) {
+
+    public void setIncomeAmount(Double incomeAmount) {
         this.incomeAmount = incomeAmount;
     }
-    public Float getExpenseAmount() {
+
+    public Double getExpenseAmount() {
         return expenseAmount;
     }
-    public void setExpenseAmount(Float expenseAmount) {
+
+    public void setExpenseAmount(Double expenseAmount) {
         this.expenseAmount = expenseAmount;
     }
 
-    
 }

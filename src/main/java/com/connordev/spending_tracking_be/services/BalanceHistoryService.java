@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import com.connordev.spending_tracking_be.repositories.BalanceHistoryRepository;
 import com.connordev.spending_tracking_be.entities.BalanceHistoryEntity;
 import com.connordev.spending_tracking_be.models.BalanceHistoryModel;
+import com.connordev.spending_tracking_be.models.TransactionModel;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -36,10 +37,14 @@ public class BalanceHistoryService {
         }
     }
 
-    public BalanceHistoryModel createBalanceHistory(Double balance) {
+    public BalanceHistoryModel createBalanceHistory(String transactionId, Double balance) {
         log.info("Creating new balance history: {}", balance);
+        TransactionModel transaction = TransactionModel.builder()
+                .id(transactionId)
+                .build(); // Assuming transaction ID is sufficient for the model
         BalanceHistoryModel balanceHistoryModel = BalanceHistoryModel.builder()
                 .balance(balance)
+                .transaction(transaction)
                 .createdDate(LocalDateTime.now())
                 .build();
         BalanceHistoryEntity entity = balanceHistoryMapper.mapToEntity(balanceHistoryModel);

@@ -48,21 +48,26 @@ public class TransactionService {
 
         TransactionType transactionType = transactionModel.getTransactionType();
         log.info("Transaction type: {}", transactionType);
-
+        double incomeAmount = 0;
+        double expenseAmount = 0;
         if (transactionType == TransactionType.INCOME) {
             // income -> add to balance
             currentBalance += transactionModel.getAmount();
+            incomeAmount = transactionModel.getAmount();
         } else if (transactionType == TransactionType.EXPENSE) {
             // expense -> subtract from balance
             currentBalance -= transactionModel.getAmount();
+            expenseAmount = transactionModel.getAmount();
         }
 
         log.info("Updated current balance: {}", currentBalance);
-        balanceHistoryService.createBalanceHistory(currentBalance);
+
         // create new balance history
         TransactionEntity transactionEntity = transactionMapper.map(transactionModel);
         transactionRepository.save(transactionEntity);
         log.info("Transaction saved with ID: {}", transactionEntity.getId());
+
+        balanceHistoryService.createBalanceHistory(transactionEntity.getId(), currentBalance);
 
         int month = transactionModel.getCreatedDate().getMonthValue();
         int year = transactionModel.getCreatedDate().getYear();
@@ -72,10 +77,13 @@ public class TransactionService {
 
         if (cashflowModelOpt.isPresent()) {
             log.info("Cashflow found for month: {}, year: {}", month, year);
+            cashflowModelOpt.get().setIncomeAmount(cashflowModelOpt.get().getIncomeAmount() + incomeAmount);
+            cashflowModelOpt.get().setExpenseAmount(cashflowModelOpt.get().getExpenseAmount() + expenseAmount);
+            cashflowService.updateCashflow(transactionEntity.getId(), cashflowModelOpt.get());
         } else {
             log.info("No cashflow found for month: {}, year: {}, creating new cashflow record", month, year);
             // create new cashflow record
-            cashflowService.createNewCashflow(month, year, 0.0, 0.0);
+            cashflowService.createNewCashflow(transactionEntity.getId(), month, year, incomeAmount, expenseAmount);
         }
         return transactionModel;
     }
